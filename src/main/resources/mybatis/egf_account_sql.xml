@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egfbank.account">
+<!-- insert EgfAccount -->
+<insert id="insertEgfAccount" parameterType="egfAccount" keyProperty="id" useGeneratedKeys="true">
+	<![CDATA[
+		INSERT INTO EGF_ACCOUNT (
+	ACCOUNT_NO,ACCOUNT_TYPE,BALANCE,FREEZE_AMOUNT,STATUS,CARD_ID,ALIAS_NAME,ACCOUNT_TITLE,ACCOUNT_DIRECTION,DEPOSIT_AMOUNT,SYSTEM_AMOUNT,FREEZE_MODE,PREVIOUS_BALANCE,CREATE_TIME,UPDATE_TIME
+		)VALUES(
+		#{accountNo,jdbcType=VARCHAR},#{accountType,jdbcType=VARCHAR},#{balance,jdbcType=DECIMAL},#{freezeAmount,jdbcType=DECIMAL},#{status,jdbcType=CHAR},#{cardId,jdbcType=VARCHAR},#{aliasName,jdbcType=VARCHAR},#{accountTitle,jdbcType=VARCHAR},#{accountDirection,jdbcType=CHAR},#{depositAmount,jdbcType=DECIMAL},#{systemAmount,jdbcType=DECIMAL},#{freezeMode,jdbcType=VARCHAR},#{previousBalance,jdbcType=DECIMAL},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+	]]>
+</insert>
+
+<!-- update EgfAccount -->
+<update id="updateEgfAccount" parameterType="egfAccount">
+	<![CDATA[
+		UPDATE 
+		EGF_ACCOUNT 
+		SET 
+		 ACCOUNT_NO=ACCOUNT_NO
+	]]>
+			<if test="null != accountType and '' != accountType">
+	<![CDATA[
+,ACCOUNT_TYPE = #{accountType}
+	]]>
+	</if>
+	<if test="null != balance">
+	<![CDATA[
+,BALANCE = #{balance}
+	]]>
+	</if>
+	<if test="null != freezeAmount">
+	<![CDATA[
+,FREEZE_AMOUNT = #{freezeAmount}
+	]]>
+	</if>
+	<if test="null != status and '' != status">
+	<![CDATA[
+,STATUS = #{status}
+	]]>
+	</if>
+	<if test="null != cardId and '' != cardId">
+	<![CDATA[
+,CARD_ID = #{cardId}
+	]]>
+	</if>
+	<if test="null != aliasName and '' != aliasName">
+	<![CDATA[
+,ALIAS_NAME = #{aliasName}
+	]]>
+	</if>
+	<if test="null != accountTitle and '' != accountTitle">
+	<![CDATA[
+,ACCOUNT_TITLE = #{accountTitle}
+	]]>
+	</if>
+	<if test="null != accountDirection and '' != accountDirection">
+	<![CDATA[
+,ACCOUNT_DIRECTION = #{accountDirection}
+	]]>
+	</if>
+	<if test="null != depositAmount">
+	<![CDATA[
+,DEPOSIT_AMOUNT = #{depositAmount}
+	]]>
+	</if>
+	<if test="null != systemAmount">
+	<![CDATA[
+,SYSTEM_AMOUNT = #{systemAmount}
+	]]>
+	</if>
+	<if test="null != freezeMode and '' != freezeMode">
+	<![CDATA[
+,FREEZE_MODE = #{freezeMode}
+	]]>
+	</if>
+	<if test="null != previousBalance">
+	<![CDATA[
+,PREVIOUS_BALANCE = #{previousBalance}
+	]]>
+	</if>
+	<if test="null != createTime">
+	<![CDATA[
+,CREATE_TIME = #{createTime}
+	]]>
+	</if>
+	<if test="null != updateTime">
+	<![CDATA[
+,UPDATE_TIME = #{updateTime}
+	]]>
+	</if>
+	<![CDATA[
+
+		WHERE  ACCOUNT_NO = #{accountNo} 
+	]]>
+</update>
+
+<!-- delete EgfAccount -->
+<delete id="deleteEgfAccount" parameterType="string">
+	<![CDATA[
+		DELETE FROM EGF_ACCOUNT WHERE id = #{id}
+	]]>
+</delete>
+
+<!-- select EgfAccount for update-->
+<!-- select EgfAccount -->
+<select id="queryEgfAccountForUpdate" resultType="egfAccount" parameterType="egfAccount" >
+<![CDATA[
+SELECT 
+ACCOUNT_NO as accountNo,ACCOUNT_TYPE as accountType,BALANCE as balance,FREEZE_AMOUNT as freezeAmount,STATUS as status,CARD_ID as cardId,ALIAS_NAME as aliasName,ACCOUNT_TITLE as accountTitle,ACCOUNT_DIRECTION as accountDirection,DEPOSIT_AMOUNT as depositAmount,SYSTEM_AMOUNT as systemAmount,FREEZE_MODE as freezeMode,PREVIOUS_BALANCE as previousBalance,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT
+]]>
+WHERE ACCOUNT_NO = #{accountNo} for update 
+</select>
+
+<!-- select EgfAccount -->
+<select id="queryEgfAccountByWhere" resultType="egfAccount" parameterType="egfAccount" >
+<![CDATA[
+SELECT 
+ACCOUNT_NO as accountNo,ACCOUNT_TYPE as accountType,BALANCE as balance,FREEZE_AMOUNT as freezeAmount,STATUS as status,CARD_ID as cardId,ALIAS_NAME as aliasName,ACCOUNT_TITLE as accountTitle,ACCOUNT_DIRECTION as accountDirection,DEPOSIT_AMOUNT as depositAmount,SYSTEM_AMOUNT as systemAmount,FREEZE_MODE as freezeMode,PREVIOUS_BALANCE as previousBalance,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT WHERE ROWNUM <= 10 
+]]>
+<if test="null != accountNo and '' != accountNo">
+<![CDATA[
+AND ACCOUNT_NO = #{accountNo}
+]]>
+</if>
+<if test="null != accountType and '' != accountType">
+<![CDATA[
+AND ACCOUNT_TYPE = #{accountType}
+]]>
+</if>
+<if test="null != balance and '' != balance">
+<![CDATA[
+AND BALANCE = #{balance}
+]]>
+</if>
+<if test="null != freezeAmount and '' != freezeAmount">
+<![CDATA[
+AND FREEZE_AMOUNT = #{freezeAmount}
+]]>
+</if>
+<if test="null != status and '' != status">
+<![CDATA[
+AND STATUS = #{status}
+]]>
+</if>
+<if test="null != cardId and '' != cardId">
+<![CDATA[
+AND CARD_ID = #{cardId}
+]]>
+</if>
+<if test="null != aliasName and '' != aliasName">
+<![CDATA[
+AND ALIAS_NAME = #{aliasName}
+]]>
+</if>
+<if test="null != accountTitle and '' != accountTitle">
+<![CDATA[
+AND ACCOUNT_TITLE = #{accountTitle}
+]]>
+</if>
+<if test="null != accountDirection and '' != accountDirection">
+<![CDATA[
+AND ACCOUNT_DIRECTION = #{accountDirection}
+]]>
+</if>
+<if test="null != depositAmount and '' != depositAmount">
+<![CDATA[
+AND DEPOSIT_AMOUNT = #{depositAmount}
+]]>
+</if>
+<if test="null != systemAmount and '' != systemAmount">
+<![CDATA[
+AND SYSTEM_AMOUNT = #{systemAmount}
+]]>
+</if>
+<if test="null != freezeMode and '' != freezeMode">
+<![CDATA[
+AND FREEZE_MODE = #{freezeMode}
+]]>
+</if>
+<if test="null != previousBalance and '' != previousBalance">
+<![CDATA[
+AND PREVIOUS_BALANCE = #{previousBalance}
+]]>
+</if>
+<if test="null != createTime and '' != createTime">
+<![CDATA[
+AND CREATE_TIME = #{createTime}
+]]>
+</if>
+<if test="null != updateTime and '' != updateTime">
+<![CDATA[
+AND UPDATE_TIME = #{updateTime}
+]]>
+</if>
+</select>
+</mapper>

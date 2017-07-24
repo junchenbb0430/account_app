@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE generatorConfiguration
+          PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+          "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  
+  <!-- 加入属性参数，可以覆盖重名文件 
+  	mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+   -->
+  <generatorConfiguration>
+      <classPathEntry
+              location="F:/WorkSpace/account-webapp/src/main/resources/config/mysqllib/mysql-connector-java-5.1.40.jar"/>
+      <context id="my" targetRuntime="MyBatis3">
+         <commentGenerator>
+             <property name="suppressDate" value="false"/>
+             <property name="suppressAllComments" value="true"/>
+         </commentGenerator>
+ 		<!--  driver: oracle.jdbc.driver.OracleDriver
+ 			url:jdbc:oracle:thin:@172.20.16.***:1521:CARGO
+ 		-->
+         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                         connectionURL="jdbc:mysql://localhost:3306/egf_account"
+                         userId="root"
+                         password="320721Cba"/>
+ 
+         <javaModelGenerator targetPackage="com.egfbank.account.pojo"
+                             targetProject="F:/WorkSpace/account-webapp/src/main/java">
+             <property name="enableSubPackages" value="true"/>
+             <property name="trimStrings" value="true"/>
+         </javaModelGenerator>
+ 		<!-- 生成sql映射文件和位置 -->
+         <sqlMapGenerator targetPackage="mybatis"
+                          targetProject="F:/WorkSpace/account-webapp/src/main/resources">
+             <property name="enableSubPackages" value="true"/>
+         </sqlMapGenerator>
+ 		<!-- 生成mapper接口 
+ 		  属性：implementationPackage:如果指定了该属性，实现类就会生成在这个包中 
+ 		-->
+         <javaClientGenerator targetPackage="com.egfbank.account.dao"
+                              targetProject="F:/WorkSpace/account-webapp/src/main/java"
+                               type="XMLMAPPER" >
+             <property name="enableSubPackages" value="true"/>
+         </javaClientGenerator>
+ 
+          
+ 
+         <table tableName="egf_account" domainObjectName="Account"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+ 		<table tableName="egf_account_log" domainObjectName="AccountLog"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+         <table tableName="EGF_ACCOUNT_FREEZE" domainObjectName="AccountFreeze"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+         <table tableName="EGF_ACCOUNT_FREEZE_LOG" domainObjectName="AccountFreezeLog"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+         <table tableName="EGF_ACCOUNT_INST" domainObjectName="AccountInst"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+         <table tableName="EGF_ACCOUNT_INST_LOG" domainObjectName="AccountInstLog"
+                enableCountByExample="false" enableUpdateByExample="false"
+                enableDeleteByExample="false" enableSelectByExample="false"
+                selectByExampleQueryId="false">
+         </table>
+     </context>
+ </generatorConfiguration>

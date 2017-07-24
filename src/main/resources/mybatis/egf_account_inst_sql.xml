@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egfbank.account">
+<!-- insert EgfAccountInst -->
+<insert id="insertEgfAccountInst" parameterType="egfAccountInst" keyProperty="id" useGeneratedKeys="true">
+	<![CDATA[
+		INSERT INTO EGF_ACCOUNT_INST (
+	INST_ACCOUNT_NO,ACCOUNT_TYPE,CURRENCY,BALANCE,ENABLED_STATUS,ALIAS_NAME,ACCOUNT_TITLE,BALANCE_DIRECTION,SYSTEM_AMOUNT,TRANS_RULE,PREVIOUS_BALANCE,LAST_TRANS_DATE,INST_CHANNEL_API,CREATE_TIME,UPDATE_TIME
+		)VALUES(
+		#{instAccountNo,jdbcType=VARCHAR},#{accountType,jdbcType=VARCHAR},#{currency,jdbcType=VARCHAR},#{balance,jdbcType=DECIMAL},#{enabledStatus,jdbcType=VARCHAR},#{aliasName,jdbcType=VARCHAR},#{accountTitle,jdbcType=VARCHAR},#{balanceDirection,jdbcType=VARCHAR},#{systemAmount,jdbcType=DECIMAL},#{transRule,jdbcType=VARCHAR},#{previousBalance,jdbcType=DECIMAL},#{lastTransDate,jdbcType=VARCHAR},#{instChannelApi,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+	]]>
+</insert>
+
+<!-- update EgfAccountInst -->
+<update id="updateEgfAccountInst" parameterType="egfAccountInst">
+	<![CDATA[
+		UPDATE 
+		EGF_ACCOUNT_INST 
+		SET 
+		 INST_ACCOUNT_NO=INST_ACCOUNT_NO
+	]]>
+			<if test="null != accountType and '' != accountType">
+	<![CDATA[
+,ACCOUNT_TYPE = #{accountType}
+	]]>
+	</if>
+	<if test="null != currency and '' != currency">
+	<![CDATA[
+,CURRENCY = #{currency}
+	]]>
+	</if>
+	<if test="null != balance">
+	<![CDATA[
+,BALANCE = #{balance}
+	]]>
+	</if>
+	<if test="null != enabledStatus and '' != enabledStatus">
+	<![CDATA[
+,ENABLED_STATUS = #{enabledStatus}
+	]]>
+	</if>
+	<if test="null != aliasName and '' != aliasName">
+	<![CDATA[
+,ALIAS_NAME = #{aliasName}
+	]]>
+	</if>
+	<if test="null != accountTitle and '' != accountTitle">
+	<![CDATA[
+,ACCOUNT_TITLE = #{accountTitle}
+	]]>
+	</if>
+	<if test="null != balanceDirection and '' != balanceDirection">
+	<![CDATA[
+,BALANCE_DIRECTION = #{balanceDirection}
+	]]>
+	</if>
+	<if test="null != systemAmount">
+	<![CDATA[
+,SYSTEM_AMOUNT = #{systemAmount}
+	]]>
+	</if>
+	<if test="null != transRule and '' != transRule">
+	<![CDATA[
+,TRANS_RULE = #{transRule}
+	]]>
+	</if>
+	<if test="null != previousBalance">
+	<![CDATA[
+,PREVIOUS_BALANCE = #{previousBalance}
+	]]>
+	</if>
+	<if test="null != lastTransDate and '' != lastTransDate">
+	<![CDATA[
+,LAST_TRANS_DATE = #{lastTransDate}
+	]]>
+	</if>
+	<if test="null != instChannelApi and '' != instChannelApi">
+	<![CDATA[
+,INST_CHANNEL_API = #{instChannelApi}
+	]]>
+	</if>
+	<if test="null != createTime">
+	<![CDATA[
+,CREATE_TIME = #{createTime}
+	]]>
+	</if>
+	<if test="null != updateTime">
+	<![CDATA[
+,UPDATE_TIME = #{updateTime}
+	]]>
+	</if>
+	<![CDATA[
+
+		WHERE  INST_ACCOUNT_NO = #{instAccountNo} 
+	]]>
+</update>
+
+<!-- delete EgfAccountInst -->
+<delete id="deleteEgfAccountInst" parameterType="string">
+	<![CDATA[
+		DELETE FROM EGF_ACCOUNT_INST WHERE id = #{id}
+	]]>
+</delete>
+
+<!-- select EgfAccountInst for update-->
+<!-- select EgfAccountInst -->
+<select id="queryEgfAccountInstForUpdate" resultType="egfAccountInst" parameterType="egfAccountInst" >
+<![CDATA[
+SELECT 
+INST_ACCOUNT_NO as instAccountNo,ACCOUNT_TYPE as accountType,CURRENCY as currency,BALANCE as balance,ENABLED_STATUS as enabledStatus,ALIAS_NAME as aliasName,ACCOUNT_TITLE as accountTitle,BALANCE_DIRECTION as balanceDirection,SYSTEM_AMOUNT as systemAmount,TRANS_RULE as transRule,PREVIOUS_BALANCE as previousBalance,LAST_TRANS_DATE as lastTransDate,INST_CHANNEL_API as instChannelApi,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_INST
+]]>
+WHERE INST_ACCOUNT_NO = #{instAccountNo} for update 
+</select>
+
+<!-- select EgfAccountInst -->
+<select id="queryEgfAccountInstByWhere" resultType="egfAccountInst" parameterType="egfAccountInst" >
+<![CDATA[
+SELECT 
+INST_ACCOUNT_NO as instAccountNo,ACCOUNT_TYPE as accountType,CURRENCY as currency,BALANCE as balance,ENABLED_STATUS as enabledStatus,ALIAS_NAME as aliasName,ACCOUNT_TITLE as accountTitle,BALANCE_DIRECTION as balanceDirection,SYSTEM_AMOUNT as systemAmount,TRANS_RULE as transRule,PREVIOUS_BALANCE as previousBalance,LAST_TRANS_DATE as lastTransDate,INST_CHANNEL_API as instChannelApi,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_INST WHERE ROWNUM <= 10 
+]]>
+<if test="null != instAccountNo and '' != instAccountNo">
+<![CDATA[
+AND INST_ACCOUNT_NO = #{instAccountNo}
+]]>
+</if>
+<if test="null != accountType and '' != accountType">
+<![CDATA[
+AND ACCOUNT_TYPE = #{accountType}
+]]>
+</if>
+<if test="null != currency and '' != currency">
+<![CDATA[
+AND CURRENCY = #{currency}
+]]>
+</if>
+<if test="null != balance and '' != balance">
+<![CDATA[
+AND BALANCE = #{balance}
+]]>
+</if>
+<if test="null != enabledStatus and '' != enabledStatus">
+<![CDATA[
+AND ENABLED_STATUS = #{enabledStatus}
+]]>
+</if>
+<if test="null != aliasName and '' != aliasName">
+<![CDATA[
+AND ALIAS_NAME = #{aliasName}
+]]>
+</if>
+<if test="null != accountTitle and '' != accountTitle">
+<![CDATA[
+AND ACCOUNT_TITLE = #{accountTitle}
+]]>
+</if>
+<if test="null != balanceDirection and '' != balanceDirection">
+<![CDATA[
+AND BALANCE_DIRECTION = #{balanceDirection}
+]]>
+</if>
+<if test="null != systemAmount and '' != systemAmount">
+<![CDATA[
+AND SYSTEM_AMOUNT = #{systemAmount}
+]]>
+</if>
+<if test="null != transRule and '' != transRule">
+<![CDATA[
+AND TRANS_RULE = #{transRule}
+]]>
+</if>
+<if test="null != previousBalance and '' != previousBalance">
+<![CDATA[
+AND PREVIOUS_BALANCE = #{previousBalance}
+]]>
+</if>
+<if test="null != lastTransDate and '' != lastTransDate">
+<![CDATA[
+AND LAST_TRANS_DATE = #{lastTransDate}
+]]>
+</if>
+<if test="null != instChannelApi and '' != instChannelApi">
+<![CDATA[
+AND INST_CHANNEL_API = #{instChannelApi}
+]]>
+</if>
+<if test="null != createTime and '' != createTime">
+<![CDATA[
+AND CREATE_TIME = #{createTime}
+]]>
+</if>
+<if test="null != updateTime and '' != updateTime">
+<![CDATA[
+AND UPDATE_TIME = #{updateTime}
+]]>
+</if>
+</select>
+</mapper>

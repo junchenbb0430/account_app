@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egfbank.account">
+<!-- insert EgfAccountFreezeLog -->
+<insert id="insertEgfAccountFreezeLog" parameterType="egfAccountFreezeLog" keyProperty="id" useGeneratedKeys="true">
+	<![CDATA[
+		INSERT INTO EGF_ACCOUNT_FREEZE_LOG (
+	FREEZE_ID_LOG,ACCOUNT_NO,OUT_ORDER_NO,ACTION_TYPE,AMOUNT,FREEZE_TYPE,TOTAL_FREEZE_AMOUNT,TYPE_FREEZE_AMOUNT,FREEZE_MEMO,BEYOND_ORDER_NO,TRANS_TIME,CREATE_TIME
+		)VALUES(
+		#{freezeIdLog,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},#{outOrderNo,jdbcType=VARCHAR},#{actionType,jdbcType=VARCHAR},#{amount,jdbcType=DECIMAL},#{freezeType,jdbcType=VARCHAR},#{totalFreezeAmount,jdbcType=DECIMAL},#{typeFreezeAmount,jdbcType=DECIMAL},#{freezeMemo,jdbcType=VARCHAR},#{beyondOrderNo,jdbcType=VARCHAR},#{transTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP})
+	]]>
+</insert>
+
+<!-- update EgfAccountFreezeLog -->
+<update id="updateEgfAccountFreezeLog" parameterType="egfAccountFreezeLog">
+	<![CDATA[
+		UPDATE 
+		EGF_ACCOUNT_FREEZE_LOG 
+		SET 
+		 FREEZE_ID_LOG=FREEZE_ID_LOG
+	]]>
+			<if test="null != accountNo and '' != accountNo">
+	<![CDATA[
+,ACCOUNT_NO = #{accountNo}
+	]]>
+	</if>
+	<if test="null != outOrderNo and '' != outOrderNo">
+	<![CDATA[
+,OUT_ORDER_NO = #{outOrderNo}
+	]]>
+	</if>
+	<if test="null != actionType and '' != actionType">
+	<![CDATA[
+,ACTION_TYPE = #{actionType}
+	]]>
+	</if>
+	<if test="null != amount">
+	<![CDATA[
+,AMOUNT = #{amount}
+	]]>
+	</if>
+	<if test="null != freezeType and '' != freezeType">
+	<![CDATA[
+,FREEZE_TYPE = #{freezeType}
+	]]>
+	</if>
+	<if test="null != totalFreezeAmount">
+	<![CDATA[
+,TOTAL_FREEZE_AMOUNT = #{totalFreezeAmount}
+	]]>
+	</if>
+	<if test="null != typeFreezeAmount">
+	<![CDATA[
+,TYPE_FREEZE_AMOUNT = #{typeFreezeAmount}
+	]]>
+	</if>
+	<if test="null != freezeMemo and '' != freezeMemo">
+	<![CDATA[
+,FREEZE_MEMO = #{freezeMemo}
+	]]>
+	</if>
+	<if test="null != beyondOrderNo and '' != beyondOrderNo">
+	<![CDATA[
+,BEYOND_ORDER_NO = #{beyondOrderNo}
+	]]>
+	</if>
+	<if test="null != transTime">
+	<![CDATA[
+,TRANS_TIME = #{transTime}
+	]]>
+	</if>
+	<if test="null != createTime">
+	<![CDATA[
+,CREATE_TIME = #{createTime}
+	]]>
+	</if>
+	<![CDATA[
+
+		WHERE  FREEZE_ID_LOG = #{freezeIdLog} 
+	]]>
+</update>
+
+<!-- delete EgfAccountFreezeLog -->
+<delete id="deleteEgfAccountFreezeLog" parameterType="string">
+	<![CDATA[
+		DELETE FROM EGF_ACCOUNT_FREEZE_LOG WHERE id = #{id}
+	]]>
+</delete>
+
+<!-- select EgfAccountFreezeLog for update-->
+<!-- select EgfAccountFreezeLog -->
+<select id="queryEgfAccountFreezeLogForUpdate" resultType="egfAccountFreezeLog" parameterType="egfAccountFreezeLog" >
+<![CDATA[
+SELECT 
+FREEZE_ID_LOG as freezeIdLog,ACCOUNT_NO as accountNo,OUT_ORDER_NO as outOrderNo,ACTION_TYPE as actionType,AMOUNT as amount,FREEZE_TYPE as freezeType,TOTAL_FREEZE_AMOUNT as totalFreezeAmount,TYPE_FREEZE_AMOUNT as typeFreezeAmount,FREEZE_MEMO as freezeMemo,BEYOND_ORDER_NO as beyondOrderNo,TRANS_TIME as transTime,CREATE_TIME as createTime FROM EGF_ACCOUNT_FREEZE_LOG
+]]>
+WHERE FREEZE_ID_LOG = #{freezeIdLog} for update 
+</select>
+
+<!-- select EgfAccountFreezeLog -->
+<select id="queryEgfAccountFreezeLogByWhere" resultType="egfAccountFreezeLog" parameterType="egfAccountFreezeLog" >
+<![CDATA[
+SELECT 
+FREEZE_ID_LOG as freezeIdLog,ACCOUNT_NO as accountNo,OUT_ORDER_NO as outOrderNo,ACTION_TYPE as actionType,AMOUNT as amount,FREEZE_TYPE as freezeType,TOTAL_FREEZE_AMOUNT as totalFreezeAmount,TYPE_FREEZE_AMOUNT as typeFreezeAmount,FREEZE_MEMO as freezeMemo,BEYOND_ORDER_NO as beyondOrderNo,TRANS_TIME as transTime,CREATE_TIME as createTime FROM EGF_ACCOUNT_FREEZE_LOG WHERE ROWNUM <= 10 
+]]>
+<if test="null != freezeIdLog and '' != freezeIdLog">
+<![CDATA[
+AND FREEZE_ID_LOG = #{freezeIdLog}
+]]>
+</if>
+<if test="null != accountNo and '' != accountNo">
+<![CDATA[
+AND ACCOUNT_NO = #{accountNo}
+]]>
+</if>
+<if test="null != outOrderNo and '' != outOrderNo">
+<![CDATA[
+AND OUT_ORDER_NO = #{outOrderNo}
+]]>
+</if>
+<if test="null != actionType and '' != actionType">
+<![CDATA[
+AND ACTION_TYPE = #{actionType}
+]]>
+</if>
+<if test="null != amount and '' != amount">
+<![CDATA[
+AND AMOUNT = #{amount}
+]]>
+</if>
+<if test="null != freezeType and '' != freezeType">
+<![CDATA[
+AND FREEZE_TYPE = #{freezeType}
+]]>
+</if>
+<if test="null != totalFreezeAmount and '' != totalFreezeAmount">
+<![CDATA[
+AND TOTAL_FREEZE_AMOUNT = #{totalFreezeAmount}
+]]>
+</if>
+<if test="null != typeFreezeAmount and '' != typeFreezeAmount">
+<![CDATA[
+AND TYPE_FREEZE_AMOUNT = #{typeFreezeAmount}
+]]>
+</if>
+<if test="null != freezeMemo and '' != freezeMemo">
+<![CDATA[
+AND FREEZE_MEMO = #{freezeMemo}
+]]>
+</if>
+<if test="null != beyondOrderNo and '' != beyondOrderNo">
+<![CDATA[
+AND BEYOND_ORDER_NO = #{beyondOrderNo}
+]]>
+</if>
+<if test="null != transTime and '' != transTime">
+<![CDATA[
+AND TRANS_TIME = #{transTime}
+]]>
+</if>
+<if test="null != createTime and '' != createTime">
+<![CDATA[
+AND CREATE_TIME = #{createTime}
+]]>
+</if>
+</select>
+</mapper>

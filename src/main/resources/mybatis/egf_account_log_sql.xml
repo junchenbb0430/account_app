@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egfbank.account">
+<!-- insert EgfAccountLog -->
+<insert id="insertEgfAccountLog" parameterType="egfAccountLog" keyProperty="id" useGeneratedKeys="true">
+	<![CDATA[
+		INSERT INTO EGF_ACCOUNT_LOG (
+	ACCOUNT_LOG_ID,ACCOUNT_NO,TRANS_DATE,TRANS_CODE,SUB_TRANS_CODE,TRANS_BALANCE,TRANS_AMOUNT,BALANCE,TRANS_CURRENCY,TRANS_ACCOUNT,OTHER_ACCOUNT,TRANS_MEMO,OTHER_ACCOUNT_LOG,ACCOUNT_TYPE,OTHER_ACCOUNT_TYPE,INST_CHANNEL,BANK_NAME,PAY_BANK_NAME,BANK_ID,PAY_BANK_ID,OUT_ORDER_NO,TRANS_TYPE,BEYOND_ORDER_NO,CREATE_TIME,UPDATE_TIME
+		)VALUES(
+		#{accountLogId,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},#{transDate,jdbcType=VARCHAR},#{transCode,jdbcType=VARCHAR},#{subTransCode,jdbcType=VARCHAR},#{transBalance,jdbcType=DECIMAL},#{transAmount,jdbcType=DECIMAL},#{balance,jdbcType=DECIMAL},#{transCurrency,jdbcType=VARCHAR},#{transAccount,jdbcType=VARCHAR},#{otherAccount,jdbcType=VARCHAR},#{transMemo,jdbcType=VARCHAR},#{otherAccountLog,jdbcType=VARCHAR},#{accountType,jdbcType=VARCHAR},#{otherAccountType,jdbcType=VARCHAR},#{instChannel,jdbcType=VARCHAR},#{bankName,jdbcType=VARCHAR},#{payBankName,jdbcType=VARCHAR},#{bankId,jdbcType=VARCHAR},#{payBankId,jdbcType=VARCHAR},#{outOrderNo,jdbcType=VARCHAR},#{transType,jdbcType=VARCHAR},#{beyondOrderNo,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+	]]>
+</insert>
+
+<!-- update EgfAccountLog -->
+<update id="updateEgfAccountLog" parameterType="egfAccountLog">
+	<![CDATA[
+		UPDATE 
+		EGF_ACCOUNT_LOG 
+		SET 
+		 ACCOUNT_LOG_ID=ACCOUNT_LOG_ID
+	]]>
+			<if test="null != accountNo and '' != accountNo">
+	<![CDATA[
+,ACCOUNT_NO = #{accountNo}
+	]]>
+	</if>
+	<if test="null != transDate and '' != transDate">
+	<![CDATA[
+,TRANS_DATE = #{transDate}
+	]]>
+	</if>
+	<if test="null != transCode and '' != transCode">
+	<![CDATA[
+,TRANS_CODE = #{transCode}
+	]]>
+	</if>
+	<if test="null != subTransCode and '' != subTransCode">
+	<![CDATA[
+,SUB_TRANS_CODE = #{subTransCode}
+	]]>
+	</if>
+	<if test="null != transBalance">
+	<![CDATA[
+,TRANS_BALANCE = #{transBalance}
+	]]>
+	</if>
+	<if test="null != transAmount">
+	<![CDATA[
+,TRANS_AMOUNT = #{transAmount}
+	]]>
+	</if>
+	<if test="null != balance">
+	<![CDATA[
+,BALANCE = #{balance}
+	]]>
+	</if>
+	<if test="null != transCurrency and '' != transCurrency">
+	<![CDATA[
+,TRANS_CURRENCY = #{transCurrency}
+	]]>
+	</if>
+	<if test="null != transAccount and '' != transAccount">
+	<![CDATA[
+,TRANS_ACCOUNT = #{transAccount}
+	]]>
+	</if>
+	<if test="null != otherAccount and '' != otherAccount">
+	<![CDATA[
+,OTHER_ACCOUNT = #{otherAccount}
+	]]>
+	</if>
+	<if test="null != transMemo and '' != transMemo">
+	<![CDATA[
+,TRANS_MEMO = #{transMemo}
+	]]>
+	</if>
+	<if test="null != otherAccountLog and '' != otherAccountLog">
+	<![CDATA[
+,OTHER_ACCOUNT_LOG = #{otherAccountLog}
+	]]>
+	</if>
+	<if test="null != accountType and '' != accountType">
+	<![CDATA[
+,ACCOUNT_TYPE = #{accountType}
+	]]>
+	</if>
+	<if test="null != otherAccountType and '' != otherAccountType">
+	<![CDATA[
+,OTHER_ACCOUNT_TYPE = #{otherAccountType}
+	]]>
+	</if>
+	<if test="null != instChannel and '' != instChannel">
+	<![CDATA[
+,INST_CHANNEL = #{instChannel}
+	]]>
+	</if>
+	<if test="null != bankName and '' != bankName">
+	<![CDATA[
+,BANK_NAME = #{bankName}
+	]]>
+	</if>
+	<if test="null != payBankName and '' != payBankName">
+	<![CDATA[
+,PAY_BANK_NAME = #{payBankName}
+	]]>
+	</if>
+	<if test="null != bankId and '' != bankId">
+	<![CDATA[
+,BANK_ID = #{bankId}
+	]]>
+	</if>
+	<if test="null != payBankId and '' != payBankId">
+	<![CDATA[
+,PAY_BANK_ID = #{payBankId}
+	]]>
+	</if>
+	<if test="null != outOrderNo and '' != outOrderNo">
+	<![CDATA[
+,OUT_ORDER_NO = #{outOrderNo}
+	]]>
+	</if>
+	<if test="null != transType and '' != transType">
+	<![CDATA[
+,TRANS_TYPE = #{transType}
+	]]>
+	</if>
+	<if test="null != beyondOrderNo and '' != beyondOrderNo">
+	<![CDATA[
+,BEYOND_ORDER_NO = #{beyondOrderNo}
+	]]>
+	</if>
+	<if test="null != createTime">
+	<![CDATA[
+,CREATE_TIME = #{createTime}
+	]]>
+	</if>
+	<if test="null != updateTime">
+	<![CDATA[
+,UPDATE_TIME = #{updateTime}
+	]]>
+	</if>
+	<![CDATA[
+
+		WHERE  ACCOUNT_LOG_ID = #{accountLogId} 
+	]]>
+</update>
+
+<!-- delete EgfAccountLog -->
+<delete id="deleteEgfAccountLog" parameterType="string">
+	<![CDATA[
+		DELETE FROM EGF_ACCOUNT_LOG WHERE id = #{id}
+	]]>
+</delete>
+
+<!-- select EgfAccountLog for update-->
+<!-- select EgfAccountLog -->
+<select id="queryEgfAccountLogForUpdate" resultType="egfAccountLog" parameterType="egfAccountLog" >
+<![CDATA[
+SELECT 
+ACCOUNT_LOG_ID as accountLogId,ACCOUNT_NO as accountNo,TRANS_DATE as transDate,TRANS_CODE as transCode,SUB_TRANS_CODE as subTransCode,TRANS_BALANCE as transBalance,TRANS_AMOUNT as transAmount,BALANCE as balance,TRANS_CURRENCY as transCurrency,TRANS_ACCOUNT as transAccount,OTHER_ACCOUNT as otherAccount,TRANS_MEMO as transMemo,OTHER_ACCOUNT_LOG as otherAccountLog,ACCOUNT_TYPE as accountType,OTHER_ACCOUNT_TYPE as otherAccountType,INST_CHANNEL as instChannel,BANK_NAME as bankName,PAY_BANK_NAME as payBankName,BANK_ID as bankId,PAY_BANK_ID as payBankId,OUT_ORDER_NO as outOrderNo,TRANS_TYPE as transType,BEYOND_ORDER_NO as beyondOrderNo,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_LOG
+]]>
+WHERE ACCOUNT_LOG_ID = #{accountLogId} for update 
+</select>
+
+<!-- select EgfAccountLog -->
+<select id="queryEgfAccountLogByWhere" resultType="egfAccountLog" parameterType="egfAccountLog" >
+<![CDATA[
+SELECT 
+ACCOUNT_LOG_ID as accountLogId,ACCOUNT_NO as accountNo,TRANS_DATE as transDate,TRANS_CODE as transCode,SUB_TRANS_CODE as subTransCode,TRANS_BALANCE as transBalance,TRANS_AMOUNT as transAmount,BALANCE as balance,TRANS_CURRENCY as transCurrency,TRANS_ACCOUNT as transAccount,OTHER_ACCOUNT as otherAccount,TRANS_MEMO as transMemo,OTHER_ACCOUNT_LOG as otherAccountLog,ACCOUNT_TYPE as accountType,OTHER_ACCOUNT_TYPE as otherAccountType,INST_CHANNEL as instChannel,BANK_NAME as bankName,PAY_BANK_NAME as payBankName,BANK_ID as bankId,PAY_BANK_ID as payBankId,OUT_ORDER_NO as outOrderNo,TRANS_TYPE as transType,BEYOND_ORDER_NO as beyondOrderNo,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_LOG WHERE ROWNUM <= 10 
+]]>
+<if test="null != accountLogId and '' != accountLogId">
+<![CDATA[
+AND ACCOUNT_LOG_ID = #{accountLogId}
+]]>
+</if>
+<if test="null != accountNo and '' != accountNo">
+<![CDATA[
+AND ACCOUNT_NO = #{accountNo}
+]]>
+</if>
+<if test="null != transDate and '' != transDate">
+<![CDATA[
+AND TRANS_DATE = #{transDate}
+]]>
+</if>
+<if test="null != transCode and '' != transCode">
+<![CDATA[
+AND TRANS_CODE = #{transCode}
+]]>
+</if>
+<if test="null != subTransCode and '' != subTransCode">
+<![CDATA[
+AND SUB_TRANS_CODE = #{subTransCode}
+]]>
+</if>
+<if test="null != transBalance and '' != transBalance">
+<![CDATA[
+AND TRANS_BALANCE = #{transBalance}
+]]>
+</if>
+<if test="null != transAmount and '' != transAmount">
+<![CDATA[
+AND TRANS_AMOUNT = #{transAmount}
+]]>
+</if>
+<if test="null != balance and '' != balance">
+<![CDATA[
+AND BALANCE = #{balance}
+]]>
+</if>
+<if test="null != transCurrency and '' != transCurrency">
+<![CDATA[
+AND TRANS_CURRENCY = #{transCurrency}
+]]>
+</if>
+<if test="null != transAccount and '' != transAccount">
+<![CDATA[
+AND TRANS_ACCOUNT = #{transAccount}
+]]>
+</if>
+<if test="null != otherAccount and '' != otherAccount">
+<![CDATA[
+AND OTHER_ACCOUNT = #{otherAccount}
+]]>
+</if>
+<if test="null != transMemo and '' != transMemo">
+<![CDATA[
+AND TRANS_MEMO = #{transMemo}
+]]>
+</if>
+<if test="null != otherAccountLog and '' != otherAccountLog">
+<![CDATA[
+AND OTHER_ACCOUNT_LOG = #{otherAccountLog}
+]]>
+</if>
+<if test="null != accountType and '' != accountType">
+<![CDATA[
+AND ACCOUNT_TYPE = #{accountType}
+]]>
+</if>
+<if test="null != otherAccountType and '' != otherAccountType">
+<![CDATA[
+AND OTHER_ACCOUNT_TYPE = #{otherAccountType}
+]]>
+</if>
+<if test="null != instChannel and '' != instChannel">
+<![CDATA[
+AND INST_CHANNEL = #{instChannel}
+]]>
+</if>
+<if test="null != bankName and '' != bankName">
+<![CDATA[
+AND BANK_NAME = #{bankName}
+]]>
+</if>
+<if test="null != payBankName and '' != payBankName">
+<![CDATA[
+AND PAY_BANK_NAME = #{payBankName}
+]]>
+</if>
+<if test="null != bankId and '' != bankId">
+<![CDATA[
+AND BANK_ID = #{bankId}
+]]>
+</if>
+<if test="null != payBankId and '' != payBankId">
+<![CDATA[
+AND PAY_BANK_ID = #{payBankId}
+]]>
+</if>
+<if test="null != outOrderNo and '' != outOrderNo">
+<![CDATA[
+AND OUT_ORDER_NO = #{outOrderNo}
+]]>
+</if>
+<if test="null != transType and '' != transType">
+<![CDATA[
+AND TRANS_TYPE = #{transType}
+]]>
+</if>
+<if test="null != beyondOrderNo and '' != beyondOrderNo">
+<![CDATA[
+AND BEYOND_ORDER_NO = #{beyondOrderNo}
+]]>
+</if>
+<if test="null != createTime and '' != createTime">
+<![CDATA[
+AND CREATE_TIME = #{createTime}
+]]>
+</if>
+<if test="null != updateTime and '' != updateTime">
+<![CDATA[
+AND UPDATE_TIME = #{updateTime}
+]]>
+</if>
+</select>
+</mapper>

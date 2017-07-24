@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egfbank.account">
+<!-- insert EgfAccountFreeze -->
+<insert id="insertEgfAccountFreeze" parameterType="egfAccountFreeze" keyProperty="id" useGeneratedKeys="true">
+	<![CDATA[
+		INSERT INTO EGF_ACCOUNT_FREEZE (
+	FREEZE_ID,ACCOUNT_NO,FREEZE_TYPE,FREEZE_AMOUNT,SYSTEM_AMOUNT,CREATE_TIME,UPDATE_TIME
+		)VALUES(
+		#{freezeId,jdbcType=VARCHAR},#{accountNo,jdbcType=VARCHAR},#{freezeType,jdbcType=VARCHAR},#{freezeAmount,jdbcType=DECIMAL},#{systemAmount,jdbcType=DECIMAL},#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+	]]>
+</insert>
+
+<!-- update EgfAccountFreeze -->
+<update id="updateEgfAccountFreeze" parameterType="egfAccountFreeze">
+	<![CDATA[
+		UPDATE 
+		EGF_ACCOUNT_FREEZE 
+		SET 
+		 FREEZE_ID=FREEZE_ID
+	]]>
+			<if test="null != accountNo and '' != accountNo">
+	<![CDATA[
+,ACCOUNT_NO = #{accountNo}
+	]]>
+	</if>
+	<if test="null != freezeType and '' != freezeType">
+	<![CDATA[
+,FREEZE_TYPE = #{freezeType}
+	]]>
+	</if>
+	<if test="null != freezeAmount">
+	<![CDATA[
+,FREEZE_AMOUNT = #{freezeAmount}
+	]]>
+	</if>
+	<if test="null != systemAmount">
+	<![CDATA[
+,SYSTEM_AMOUNT = #{systemAmount}
+	]]>
+	</if>
+	<if test="null != createTime">
+	<![CDATA[
+,CREATE_TIME = #{createTime}
+	]]>
+	</if>
+	<if test="null != updateTime">
+	<![CDATA[
+,UPDATE_TIME = #{updateTime}
+	]]>
+	</if>
+	<![CDATA[
+
+		WHERE  FREEZE_ID = #{freezeId} 
+	]]>
+</update>
+
+<!-- delete EgfAccountFreeze -->
+<delete id="deleteEgfAccountFreeze" parameterType="string">
+	<![CDATA[
+		DELETE FROM EGF_ACCOUNT_FREEZE WHERE id = #{id}
+	]]>
+</delete>
+
+<!-- select EgfAccountFreeze for update-->
+<!-- select EgfAccountFreeze -->
+<select id="queryEgfAccountFreezeForUpdate" resultType="egfAccountFreeze" parameterType="egfAccountFreeze" >
+<![CDATA[
+SELECT 
+FREEZE_ID as freezeId,ACCOUNT_NO as accountNo,FREEZE_TYPE as freezeType,FREEZE_AMOUNT as freezeAmount,SYSTEM_AMOUNT as systemAmount,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_FREEZE
+]]>
+WHERE FREEZE_ID = #{freezeId} for update 
+</select>
+
+<!-- select EgfAccountFreeze -->
+<select id="queryEgfAccountFreezeByWhere" resultType="egfAccountFreeze" parameterType="egfAccountFreeze" >
+<![CDATA[
+SELECT 
+FREEZE_ID as freezeId,ACCOUNT_NO as accountNo,FREEZE_TYPE as freezeType,FREEZE_AMOUNT as freezeAmount,SYSTEM_AMOUNT as systemAmount,CREATE_TIME as createTime,UPDATE_TIME as updateTime FROM EGF_ACCOUNT_FREEZE WHERE ROWNUM <= 10 
+]]>
+<if test="null != freezeId and '' != freezeId">
+<![CDATA[
+AND FREEZE_ID = #{freezeId}
+]]>
+</if>
+<if test="null != accountNo and '' != accountNo">
+<![CDATA[
+AND ACCOUNT_NO = #{accountNo}
+]]>
+</if>
+<if test="null != freezeType and '' != freezeType">
+<![CDATA[
+AND FREEZE_TYPE = #{freezeType}
+]]>
+</if>
+<if test="null != freezeAmount and '' != freezeAmount">
+<![CDATA[
+AND FREEZE_AMOUNT = #{freezeAmount}
+]]>
+</if>
+<if test="null != systemAmount and '' != systemAmount">
+<![CDATA[
+AND SYSTEM_AMOUNT = #{systemAmount}
+]]>
+</if>
+<if test="null != createTime and '' != createTime">
+<![CDATA[
+AND CREATE_TIME = #{createTime}
+]]>
+</if>
+<if test="null != updateTime and '' != updateTime">
+<![CDATA[
+AND UPDATE_TIME = #{updateTime}
+]]>
+</if>
+</select>
+</mapper>

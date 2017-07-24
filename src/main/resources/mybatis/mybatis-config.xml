@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  	<typeAliases>
+  		<typeAlias alias="egfAccountFreezeLog" type="com.egfbank.account.pojo.EgfAccountFreezeLog"  />
+  		<typeAlias alias="egfAccountFreeze" type="com.egfbank.account.pojo.EgfAccountFreeze"  />
+  		<typeAlias alias="egfAccountInstLog" type="com.egfbank.account.pojo.EgfAccountInstLog"  />
+  		<typeAlias alias="egfAccountInst" type="com.egfbank.account.pojo.EgfAccountInst"  />
+  		<typeAlias alias="egfAccountLog" type="com.egfbank.account.pojo.EgfAccountLog"/>
+  		<typeAlias alias="egfAccount" type="com.egfbank.account.pojo.EgfAccount"  />
+  	</typeAliases>
+</configuration>

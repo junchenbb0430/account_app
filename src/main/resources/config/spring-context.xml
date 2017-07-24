@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="propertyPlaceHolder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/profile/db_dev.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${username}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="driverClassName" value="${driverClassName}"></property>
+		<!-- 最大连接并发数 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 最小连接数量 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 初始化连接数量 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 最大等待时间
+			获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，
+			如果需要可以通过配置useUnfairLock属性为true使用非公平锁
+		 -->
+		<property name="maxWait" value="600000"></property>
+		<!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，
+		如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+		<property name="testWhileIdle" value="true"></property>
+		<!-- 用来检测连接是否有效的sql，要求是一个查询语句。
+		如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。 -->
+		<property name="validationQuery" value="select 1 from dual"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+		<property name="testOnBorrow" value="false"></property>
+		<property name="testOnReturn" value="false"></property>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mybatis/*_sql.xml"></property>
+	</bean>
+	<!--  -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlSessionFactory"/>
+	</bean>
+	<!-- jdbc或mybatis时，DataSourceTransactionManager作为事物管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"></property>
+	</bean>
+	<!-- mysql 生成主键方式 -->
+	<bean id="mysqlSequence" class="org.springframework.jdbc.support.incrementer.MySQLMaxValueIncrementer">
+		<constructor-arg name="dataSource" ref ="dataSource" />
+		<constructor-arg name="incrementerName" value=""/>
+		<constructor-arg name="columnName" value="current_value"/>
+		<property name="cacheSize" value="20"></property> 
+		<property name="paddingLength" value="10"></property>
+	</bean>
+	<!-- oracle 生成主键方式 -->
+	<context:component-scan base-package="com.egfbank.account"/>
+	
+</beans>
