@@ -2,6 +2,7 @@ package com.egfbank.concurrent.message.consumer;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.egfbank.concurrent.message.MessageBlockMechanism;
 import com.egfbank.concurrent.message.broker.MessageBrokerService;
@@ -13,34 +14,30 @@ import com.egfbank.concurrent.message.broker.MessageBrokerService;
  *
  */
 public class ConsumerService {
-	 
+	private Lock lock = new ReentrantLock();
+	private Condition condition = lock.newCondition(); 
+	
 	public String consumeMessage(){
-		Lock lock = MessageBlockMechanism.getLock();
-		Condition condition = MessageBlockMechanism.getLockCondition();
+		
 		String message = null;
 		try {
-		System.out.println("consumer : -->"+condition+",flag = "+MessageBlockMechanism.isProduceConsumeFlag());
 		//获取对象锁
-		lock.lock();
-		System.out.println("***consumer begin executing.....");
-		if(MessageBlockMechanism.isProduceConsumeFlag()){
-			System.out.println("consumer will wait");
+		lock.lock();	 
+		if(MessageBrokerService.newInstance().getCapacity()==0){	 
 			condition.await();
 		}
-		
-		if(!MessageBlockMechanism.isProduceConsumeFlag()){
-			
+		 
+		if(!MessageBlockMechanism.isProduceConsumeFlag()){		
 			 message = MessageBrokerService.newInstance().getMessage();
-			// 设置consumer获取消息标识
+			 System.out.println("consumer当前线程["+Thread.currentThread().getName()+"] 消费消息 :"+message);
+			 // 设置consumer获取消息标识
 			MessageBlockMechanism.setProduceConsumeFlag(true);
-				condition.signal();
-			System.out.println("***consumer  execute  end!.....");
+				condition.signalAll(); 
 		}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			lock.unlock();
-			System.out.println("***producer release lock ***");
+			lock.unlock(); 
 		}
 		return message;
 	}

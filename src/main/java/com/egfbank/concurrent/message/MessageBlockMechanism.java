@@ -16,10 +16,12 @@ public class MessageBlockMechanism {
 	
 	private   static  boolean  produceConsumeFlag = true;
 	
+	
 	 
 	public   static Condition getLockCondition(){
 		return  condition;
 	}
+
 	
 	public static   Lock getLock(){
 		return  lock;
@@ -34,15 +36,5 @@ public class MessageBlockMechanism {
 		MessageBlockMechanism.produceConsumeFlag = produceConsumeFlag;
 	}
 
-	public static void main(String[] args){
-		for(int i=0;i<100;i++){
-			Thread t1 = new Thread(new Runnable(){
-				public void run() {
-					 System.out.println( MessageBlockMechanism.getLock()+","+MessageBlockMechanism.getLockCondition());
-				}
-			});
-			t1.start();
-		}
-		
-	}
+
 }

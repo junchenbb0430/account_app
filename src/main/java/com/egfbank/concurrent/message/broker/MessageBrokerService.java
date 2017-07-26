@@ -13,19 +13,29 @@ public class MessageBrokerService {
 	
 	private static MessageBrokerService instance = null;
 	
-	private static List<String> oneMsgPool = new ArrayList<String>();
+	private   List<String> msgPool = new ArrayList<String>();
+	
+	
 	
 	private MessageBrokerService(){}
 	
-	public void putMessage(String msg){
-		if(!oneMsgPool.isEmpty()){
+	public int getCapacity(){
+		return msgPool.size();
+	}
+	 
+	public void putOneMessage(String msg){
+		if(!msgPool.isEmpty()){
 			throw new IllegalArgumentException("队列中消息个数不是一个");
 		}
-		oneMsgPool.add(msg);
+		msgPool.add(msg);
 	}
 	
 	public String getMessage(){
-		return oneMsgPool.remove(0);
+		return msgPool.remove(0);
+	}
+	
+	public void  putMessage(String msg){
+		msgPool.add(msg);
 	}
 	
 	/**
