@@ -4,7 +4,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.egfbank.concurrent.message.MessageBlockMechanism;
 import com.egfbank.concurrent.message.broker.MessageBrokerService;
 
 /**
@@ -27,11 +26,11 @@ public class ConsumerService {
 			condition.await();
 		}
 		 
-		if(!MessageBlockMechanism.isProduceConsumeFlag()){		
+		if(MessageBrokerService.newInstance().getCapacity()>0){		
 			 message = MessageBrokerService.newInstance().getMessage();
 			 System.out.println("consumer当前线程["+Thread.currentThread().getName()+"] 消费消息 :"+message);
 			 // 设置consumer获取消息标识
-			MessageBlockMechanism.setProduceConsumeFlag(true);
+			 
 				condition.signalAll(); 
 		}
 		} catch (Exception e) {

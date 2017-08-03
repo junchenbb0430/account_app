@@ -78,7 +78,7 @@ class ConditionService{
 		}catch(Exception e){
 			
 		}finally{
-			//lock.unlock();
+			lock.unlock();
 		}
 	}
 }
