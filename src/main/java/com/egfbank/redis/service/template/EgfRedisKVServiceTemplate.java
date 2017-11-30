@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 import com.egfbank.redis.callback.EgfRedisCallback;
-import com.egfbank.redis.factory.EgfRedisConnectionFactory;
-import com.egfbank.redis.helper.EgfRedisConnectionHelper;
+import com.egfbank.redis.factory.RedisConnectionFactory;
+import com.egfbank.redis.helper.RedisConnectionHelper;
 import com.egfbank.redis.service.EgfKeyValueService;
 import com.egfbank.serialize.EgfJdkSerializeService;
 import com.egfbank.serialize.Person;
@@ -35,8 +35,8 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	 */
 	public T execute(EgfRedisCallback action){
 		
-		EgfRedisConnectionFactory factory = this.getJedisFactory();
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(factory);
+		RedisConnectionFactory factory = this.getJedisFactory();
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(factory);
 		//action.doInRedis(conn);
 		
 		return null;
@@ -54,7 +54,7 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	 */
 	public void set(String key,String value){
 		// TODO
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		jedis.set(key, value);
 	}
 	/**
@@ -63,7 +63,7 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	 * @return
 	 */
 	public String getByStrKey(String key){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		return jedis.get(key);
 	}
 	/**
@@ -71,7 +71,7 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	 * @return
 	 */
 	public Object getValueByByteKey(byte[] key){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		byte[] values = jedis.get(key);
 		if(null == values){
 			return null;
@@ -88,7 +88,7 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	 * @param value
 	 */
 	public void storeObj(Object key,Object value){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		byte[] keyByte = EgfJdkSerializeService.serializeObject2Byte(key);
 		byte[] valueByte = EgfJdkSerializeService.serializeObject2Byte(value);
 		String result = jedis.set(keyByte, valueByte);
@@ -96,12 +96,12 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	}
 	
 	public boolean existsKey(String key){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		return jedis.exists(key);
 	}
 	
 	public boolean existKey(Object key){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		byte[] keyByte = EgfJdkSerializeService.serializeObject2Byte(key);
 		return jedis.exists(keyByte);
 	}
@@ -114,13 +114,13 @@ public class EgfRedisKVServiceTemplate<K,V, T> extends RedisDataAccessor{
 	}
 	
 	public void expireKey(String key,int second){
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		jedis.expire(key, second);
 	}
 	
 	public void expireObject(Object key,int second){
 		byte[] byteKey = EgfJdkSerializeService.serializeObject2Byte(key);
-		Jedis jedis = EgfRedisConnectionHelper.getRedisConnection(getJedisFactory());
+		Jedis jedis = RedisConnectionHelper.getRedisConnection(getJedisFactory());
 		jedis.expire(byteKey, second);
 	}
 	

@@ -10,7 +10,7 @@ import com.egfbank.redis.command.EgfRedisCommand;
  * @author lijunshi
  *
  */
-public interface  EgfRedisConnection  extends EgfRedisCommand{
+public interface  EgfRedisConnection{
 
 	 
 	

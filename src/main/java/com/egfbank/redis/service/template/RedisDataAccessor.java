@@ -2,12 +2,12 @@ package com.egfbank.redis.service.template;
 
 import org.springframework.beans.factory.InitializingBean;
 
-import com.egfbank.redis.factory.EgfRedisConnectionFactory;
+import com.egfbank.redis.factory.RedisConnectionFactory;
 
 public class RedisDataAccessor implements InitializingBean{
 
 	
-	private EgfRedisConnectionFactory  jedisFactory;
+	private RedisConnectionFactory  jedisFactory;
 
 	
 	
@@ -15,11 +15,11 @@ public class RedisDataAccessor implements InitializingBean{
 		super();
 	}
 
-	public void setJedisFactory(EgfRedisConnectionFactory jedisFactory) {
+	public void setJedisFactory(RedisConnectionFactory jedisFactory) {
 		this.jedisFactory = jedisFactory;
 	}
 
-	public EgfRedisConnectionFactory getJedisFactory() {
+	public RedisConnectionFactory getJedisFactory() {
 		return jedisFactory;
 	}
 
