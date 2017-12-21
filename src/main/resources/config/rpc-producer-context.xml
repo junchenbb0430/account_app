@@ -29,8 +29,9 @@
 	<dubbo:protocol name="dubbo" port="20880" server="netty" />
 	<!-- 序列化方式，kyro,fst,fastjson,json,jdk原生 
 	<dubbo:protocol name="dubbo" serialization="kryo" optimizer="com.alibaba.dubbo.demo.SerializationOptimizerImpl"/>
-	-->
+	
 	<dubbo:protocol name="dubbo" serialization="kryo" optimizer="com.egfbank.rpc.serialize.MessageSerializeService"/>
+	-->
 	<!-- 注册包装需要序列化的类 -->
 	<dubbo:service interface="com.egfbank.rpc.producer.RpcServerService" ref="rpcServerService"/>
 	<bean id = "rpcServerService" class="com.egfbank.rpc.producer.impl.RpcServerServiceImpl"/>

@@ -26,10 +26,29 @@
 			</list>
 		</property>
 	</bean>
+	 
+	<!-- 配置redisSentinel -->
+	<bean id="jedisSentinelPool" class = "com.egfbank.redis.sentinel.JedisSentinelConnectionPool">
+		<property name="masterName" value="${sentinel.redis.master}"/>
+		<property name="sentinelHosts" value="${sentinel.redis.hosts}"/>
+		<property name="poolConfig" ref = "poolConfig"/>
+	</bean>
+	
+	<!-- 配置GenericObjectPoolConfig -->
+	<bean id="poolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="maxTotal" value="${redis.pool.maxTotal}"/>
+		<property name="maxIdle" value="${redis.pool.maxIdle}"/>
+		<property name="minIdle" value="${redis.pool.minIdle}"/>
+	</bean>
+	
+	<bean id="keyValueService" class="com.egfbank.redis.service.impl.KeyValueServiceImpl">
+		<property name="jedisSentinelPool" ref="jedisSentinelPool"/>
+	</bean>
+	
+	
 	<bean id="redisFactory" class="com.egfbank.redis.factory.RedisConnectionFactory">
 		<property name="clusterConnStr" value="${cluster.hosts}"/>
 	</bean>
-	
 	
 	
 		<!-- 以下是spring 中的使用类 -->

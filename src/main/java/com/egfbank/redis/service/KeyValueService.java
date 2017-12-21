@@ -1,17 +1,20 @@
 package com.egfbank.redis.service;
 
-public interface EgfKeyValueService<K,V> {
+public interface KeyValueService<K,V> {
 
 	/**
 	 * 存储key,value
 	 */
-	public void set(K key,V value);
+	 void set(K key,V value);
 	
 	/**
 	 * 
 	 * @param key
 	 * @return
 	 */
-	public V get(K key);
+	 V get(K key);
+	
+	 
+	
 	
 }
