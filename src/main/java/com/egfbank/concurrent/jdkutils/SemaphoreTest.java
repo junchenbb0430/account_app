@@ -7,7 +7,7 @@ import com.egfbank.threadpool.ThreadPoolExecutorFactory;
 
 public class SemaphoreTest {
 
-	private static int  THREAD_COUNTER = 30;
+	private static int  THREAD_COUNTER = 8;
 	public static void main(String[] args) {
 		
 		// 1. 固定线程数的线程池
@@ -22,12 +22,13 @@ public class SemaphoreTest {
 				public void run() {
 					 try {
 						 semaphore.acquire(); 
+						 System.out.println("线程名称 ： "+Thread.currentThread().getName()+" save data!" );
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					
-					System.out.println("线程名称 ： "+Thread.currentThread().getName()+" save data!" );
+					
 					 semaphore.release();
 				}
 				

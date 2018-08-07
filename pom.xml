@@ -9,7 +9,7 @@
   <url>http://maven.apache.org</url>
   <properties>
   	<jdk.version>1.8</jdk.version>
-  	 <spring.version>4.3.7.RELEASE</spring.version>
+  	 <spring.version>4.3.10.RELEASE</spring.version>
   	 <!-- spring-redis的1.8版本需要jedis的版本号是2.9.0 
   	 	  spring-redis的2.0版本需要JDK8。
   	 -->  
@@ -32,7 +32,7 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-    
+    	
     <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo -->
 			<dependency>
 			    <groupId>com.alibaba</groupId>

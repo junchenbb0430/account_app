@@ -39,7 +39,7 @@ public class ThreadPoolExecutorFactory {
 	 * @param handler
 	 * @return
 	 */
-	public ExecutorService ThreadPoolExecutor(int coreSize,int maximumSize,long keepAliveTime,
+	public static  ExecutorService ThreadPoolExecutor(int coreSize,int maximumSize,long keepAliveTime,
             TimeUnit unit,BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory,
             RejectedExecutionHandler handler){
 		ExecutorService executor = new ThreadPoolExecutor(coreSize,maximumSize,keepAliveTime,unit,
