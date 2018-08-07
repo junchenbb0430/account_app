@@ -64,7 +64,7 @@ class  BankSalaryService implements Runnable{
 				
 			});
 		}
-		
+		executorService.shutdown();
 		
 	}
 	
