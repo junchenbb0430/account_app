@@ -25,6 +25,16 @@
   	 	   <httpclient.version>4.5.2</httpclient.version>
   	 	   <hibernate-validation>6.0.10.Final</hibernate-validation>
   	 	   <zkClient-version>0.10</zkClient-version>
+  	 	   <zkCurator-version>2.9.0</zkCurator-version>
+  	 	   <logback-verson>1.1.3</logback-verson>
+  	 	   <slf4j.version>1.7.7</slf4j.version>
+  	 	   	<jackson.version>2.8.7</jackson.version>
+		<fastjson.version>1.1.40</fastjson.version>
+		<xstream.version>1.4.7</xstream.version>
+		<guava.version>17.0</guava.version>
+		<!-- hystix降级，限制 -->
+		<hystrix.version>1.3.16</hystrix.version>  
+		<hystrix-metrics-event-stream.version>1.1.2</hystrix-metrics-event-stream.version>
   </properties>
   <dependencies>
     <dependency>
@@ -39,6 +49,16 @@
             <artifactId>jsr250-api</artifactId>  
             <version>1.0</version>  
     </dependency>
+    <dependency>  
+     <groupId>com.netflix.hystrix</groupId>  
+     <artifactId>hystrix-core</artifactId>  
+     <version>${hystrix.version}</version>  
+ </dependency>  
+     <dependency>  
+     <groupId>com.netflix.hystrix</groupId>  
+     <artifactId>hystrix-metrics-event-stream</artifactId>  
+     <version>${hystrix-metrics-event-stream.version}</version>  
+ </dependency> 
     <!-- https://mvnrepository.com/artifact/com.alibaba/dubbo -->
 			<dependency>
 			    <groupId>com.alibaba</groupId>
@@ -179,7 +199,18 @@
     <dependency>
 	    <groupId>org.apache.curator</groupId>
 	    <artifactId>curator-framework</artifactId>
-	    <version>2.9.0</version>
+	    <version>${zkCurator-version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+	<dependency>
+	    <groupId>org.apache.curator</groupId>
+	    <artifactId>curator-recipes</artifactId>
+	    <version>${zkCurator-version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.curator</groupId>
+	    <artifactId>curator-client</artifactId>
+	    <version>${zkCurator-version}</version>
 	</dependency>
 		<!-- kyro序列化 begIn -->
 		<dependency>
@@ -234,8 +265,52 @@
         <artifactId>spring-kafka</artifactId>
         <version>1.1.1.RELEASE</version>
     </dependency>
+    
+    <!-- logback 配置 -->
+		 <dependency>
+  			<groupId>ch.qos.logback</groupId>
+  			<artifactId>logback-core</artifactId>
+  			<version>${logback-verson}</version>
+		</dependency>
+		 <dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-access</artifactId>
+		    <version>${logback-verson}</version>
+		</dependency>	 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-verson}</version>		 
+		</dependency>
+		<dependency>  
+            <groupId>org.logback-extensions</groupId>  
+            <artifactId>logback-ext-spring</artifactId>  
+            <version>0.1.4</version>  
+        </dependency>  
+         <!-- LOGGING begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- common-logging slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>	  
   </dependencies>
-  
+  	<repository>  
+     <id>nexus</id>  
+     <name>local private nexus</name>  
+     <url>http://maven.oschina.net/content/groups/public/</url>  
+     <releases>  
+          <enabled>true</enabled>  
+     </releases>  
+     <snapshots>  
+          <enabled>false</enabled>  
+     </snapshots>  
+</repository>
   <build>
   <pluginManagement>
   <plugins>
@@ -249,7 +324,13 @@
 			<encoding>UTF-8</encoding>
 		</configuration>
    </plugin>
-  	
+  	  <plugin>
+                 <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                     <version>2.5</version>
+                 <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+                </configuration>
+             </plugin>
   
   	<plugin>
       <groupId>org.mybatis.generator</groupId>

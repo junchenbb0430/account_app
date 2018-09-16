@@ -79,6 +79,12 @@ public class ZkEventListenerService {
 			public void handleNewSession() throws Exception {
 				// TODO Auto-generated method stub
 				
+			}
+
+			@Override
+			public void handleSessionEstablishmentError(Throwable arg0) throws Exception {
+				// TODO Auto-generated method stub
+				
 			}});
 	}
 	
