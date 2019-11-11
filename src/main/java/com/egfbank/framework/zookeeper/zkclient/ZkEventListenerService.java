@@ -82,12 +82,9 @@ public class ZkEventListenerService {
 			}
 
 			@Override
-<<<<<<< HEAD
-			public void handleSessionEstablishmentError(Throwable arg0) throws Exception {
-=======
+ 
 			public void handleSessionEstablishmentError(Throwable error) throws Exception {
->>>>>>> branch 'master' of https://github.com/junchenbb0430/account_app.git
-				// TODO Auto-generated method stub
+ 
 				
 			}});
 	}
