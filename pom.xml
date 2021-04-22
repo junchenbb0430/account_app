@@ -16,7 +16,7 @@
   	 <spring.redis>1.8.4.RELEASE</spring.redis>
   	 <jedis>2.9.0</jedis>
   	 <rocketmq-client>3.4.6</rocketmq-client>
-  	 <mybatis>3.2.8</mybatis>
+  	 <mybatis>3.5.6</mybatis>
   	 <spring-mybatis>1.2.4</spring-mybatis>
   	 <dubbo-version>2.5.6</dubbo-version>
   	 	<commons-lang3.version>3.7</commons-lang3.version>
