@@ -22,7 +22,7 @@
   	 	<commons-lang3.version>3.7</commons-lang3.version>
   	 	<xstream.version>1.4.7</xstream.version>
   	 	  <guava.version>18.0</guava.version>
-  	 	   <httpclient.version>4.5.2</httpclient.version>
+  	 	   <httpclient.version>4.5.13</httpclient.version>
   	 	   <hibernate-validation>6.0.10.Final</hibernate-validation>
   	 	   <zkClient-version>0.10</zkClient-version>
   	 	   <zkCurator-version>2.9.0</zkCurator-version>
