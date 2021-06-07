@@ -26,7 +26,7 @@
   	 	   <hibernate-validation>6.0.10.Final</hibernate-validation>
   	 	   <zkClient-version>0.10</zkClient-version>
   	 	   <zkCurator-version>2.9.0</zkCurator-version>
-  	 	   <logback-verson>1.1.3</logback-verson>
+  	 	   <logback-verson>1.2.0</logback-verson>
   	 	   <slf4j.version>1.7.7</slf4j.version>
   	 	   	<jackson.version>2.8.7</jackson.version>
 		<fastjson.version>1.1.40</fastjson.version>
