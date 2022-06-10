@@ -18,7 +18,7 @@
   	 <rocketmq-client>3.4.6</rocketmq-client>
   	 <mybatis>3.2.8</mybatis>
   	 <spring-mybatis>1.2.4</spring-mybatis>
-  	 <dubbo-version>2.5.6</dubbo-version>
+  	 <dubbo-version>2.6.12</dubbo-version>
   	 	<commons-lang3.version>3.7</commons-lang3.version>
   	 	<xstream.version>1.4.7</xstream.version>
   	 	  <guava.version>18.0</guava.version>
